@@ -1,0 +1,70 @@
+<html>
+  <style>
+    body{
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+
+
+<body>
+  <h1>Welcome {{elements[0]}}!</h1>
+
+  <img src="{{elements[8]}}" alt="Profile Picture">
+
+  <h2> The Parties {{elements[0]}} is Attending</h2>
+  <div>
+    {% for n in elements[1]%}
+    <div>{{n[0]}} &nbsp; &nbsp; &nbsp; &nbsp; {{n[1]}}</div>
+    {% endfor %}
+  </div>
+
+  <h2> The Parties {{elements[0]}} is Awaiting Approval For</h2>
+  <div>
+    {% for n in elements[7]%}
+    <div>{{n[0]}} &nbsp; &nbsp; &nbsp; &nbsp; {{n[1]}}</div>
+    {% endfor %}
+  </div>
+
+  <h2> The Parties {{elements[0]}} has Hosted</h2>
+  <div>
+    {% for n in elements[2]%}
+    <div>{{n[0]}} &nbsp; &nbsp; &nbsp; {{n[1]}}</div>
+    {% endfor %}
+  </div>
+
+  <h2> The Dishes {{elements[0]}} has Cooked</h2>
+  <div>
+    {% for n in elements[3]%}
+    <div>{{n}}</div>
+    {% endfor %}
+  </div>
+
+  <h2>Parties in your city, {{elements[4]}}</h2>
+  <div>
+    {% for n in elements[5]%}
+    <div><a href='localhost:8111/party/{{n[1]}}/{{elements[6]}}'> {{n[0]}}</a> </div>
+    {% endfor %}
+  </div>
+
+  <h2>Approval Requests for your Parties</h2>
+  <div>
+    {% for n in elements[9]%}
+    <div>{{n[0]}} &nbsp; &nbsp; {{n[1]}}</div>
+    <!-- order is pid,uid of user making request-->
+    <form action="/approve/{{n[2]}}/{{n[3]}}/{{elements[6]}}" method="POST">
+      <button type="submit">Approve</button>
+    </form>
+
+    <form action="/deny/{{n[2]}}/{{n[3]}}/{{elements[6]}}" method="POST">
+      <button type="submit">Deny</button>
+    </form>
+
+
+    {% endfor %}
+  </div>
+
+</body>
+
+
+</html>
